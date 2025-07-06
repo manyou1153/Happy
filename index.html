@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>เป่าเค้กวันเกิด พลุไฟ! 🎆🎂</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap');
+
+  /* พื้นหลังพลุไฟ */
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #0a0a0a 0%, #1a1a1a 100%);
+    font-family: 'Kanit', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    user-select: none;
+  }
+
+  .firework {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: explode 1.2s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes explode {
+    0% {
+      transform: scale(0.2);
+      opacity: 1;
+      box-shadow:
+        0 0 10px 3px #f7e018,
+        10px 0 20px 5px #f44336,
+        -10px 0 20px 5px #2196f3,
+        0 10px 20px 5px #4caf50,
+        0 -10px 20px 5px #9c27b0;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+      box-shadow: none;
+    }
+  }
+
+  h1 {
+    margin-bottom: 20px;
+    font-size: 3rem;
+    text-shadow: 0 0 10px #ff1a75;
+  }
+
+  /* เค้กก้อนใหญ่ */
+  .cake {
+    position: relative;
+    width: 400px;
+    height: 280px;
+    background: linear-gradient(135deg, #f8b195 0%, #f67280 100%);
+    border-radius: 0 0 50px 50px;
+    box-shadow: 0 10px 25px rgba(246, 114, 128, 0.7);
+    margin-bottom: 30px;
+  }
+
+  /* ชั้นเค้ก */
+  .cake-layer {
+    position: absolute;
+    width: 370px;
+    height: 60px;
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+    left: 15px;
+    border-radius: 30px;
+    box-shadow: inset 0 6px 8px #e07b99;
+  }
+  .layer1 { top: 140px; }
+  .layer2 { top: 200px; }
+
+  /* เทียนหลายเล่ม */
+  .candle {
+    position: absolute;
+    top: 40px;
+    width: 16px;
+    height: 70px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: inset 0 0 5px #ccc;
+  }
+
+  /* วางเทียนห่างกัน */
+  .candle:nth-child(1) { left: 50px; }
+  .candle:nth-child(2) { left: 110px; }
+  .candle:nth-child(3) { left: 170px; }
+  .candle:nth-child(4) { left: 230px; }
+  .candle:nth-child(5) { left: 290px; }
+
+  /* เปลวไฟเทียน */
+  .flame {
+    position: absolute;
+    top: -25px;
+    width: 24px;
+    height: 48px;
+    background: orange;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    filter: drop-shadow(0 0 7px orange);
+    animation: flicker 1s infinite alternate;
+  }
+  .flame::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 7px;
+    width: 10px;
+    height: 26px;
+    background: yellow;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    filter: drop-shadow(0 0 10px yellow);
+    animation: flicker2 1s infinite alternate;
+  }
+
+  .candle:nth-child(1) .flame { left: 0; }
+  .candle:nth-child(2) .flame { left: 0; }
+  .candle:nth-child(3) .flame { left: 0; }
+  .candle:nth-child(4) .flame { left: 0; }
+  .candle:nth-child(5) .flame { left: 0; }
+
+  @keyframes flicker {
+    0% { filter: drop-shadow(0 0 7px orange); }
+    100% { filter: drop-shadow(0 0 15px orange); }
+  }
+  @keyframes flicker2 {
+    0% { filter: drop-shadow(0 0 10px yellow); }
+    100% { filter: drop-shadow(0 0 20px yellow); }
+  }
+
+  /* ปุ่มเป่าเค้ก */
+  button {
+    padding: 18px 40px;
+    font-size: 1.5rem;
+    background: #e91e63;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 5px 15px #e91e63aa;
+    transition: background-color 0.3s ease;
+  }
+  button:hover:not(:disabled) {
+    background: #b0003a;
+  }
+  button:disabled {
+    background: #888;
+    cursor: default;
+    box-shadow: none;
+  }
+
+  /* ข้อความสุขสันต์วันเกิด */
+  #message {
+    margin-top: 30px;
+    font-size: 3rem;
+    font-weight: 900;
+    color: #ff4081;
+    text-shadow:
+      0 0 10px #ff4081,
+      0 0 20px #ff4081,
+      0 0 30px #ff4081;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
+  #message.show {
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<h1>เป่าเค้กวันเกิด พลุไฟ! 🎆🎂</h1>
+
+<div class="cake" id="cake">
+  <div class="cake-layer layer1"></div>
+  <div class="cake-layer layer2"></div>
+
+  <div class="candle" style="left:50px;">
+    <div class="flame"></div>
+  </div>
+  <div class="candle" style="left:110px;">
+    <div class="flame"></div>
+  </div>
+  <div class="candle" style="left:170px;">
+    <div class="flame"></div>
+  </div>
+  <div class="candle" style="left:230px;">
+    <div class="flame"></div>
+  </div>
+  <div class="candle" style="left:290px;">
+    <div class="flame"></div>
+  </div>
+</div>
+
+<button id="blowBtn">เป่าเค้ก!</button>
+
+<div id="message">สุขสันต์วันเกิด! 🎉🎉🎉</div>
+
+<script>
+  const blowBtn = document.getElementById("blowBtn");
+  const flames = document.querySelectorAll(".flame");
+  const message = document.getElementById("message");
+
+  // ฟังก์ชันสร้างพลุไฟหลายจุดในพื้นหลัง
+  function createFirework() {
+    const firework = document.createElement("div");
+    firework.classList.add("firework");
+
+    // สุ่มตำแหน่ง
+    firework.style.top = Math.random() * window.innerHeight + "px";
+    firework.style.left = Math.random() * window.innerWidth + "px";
+
+    // สุ่มสีไฟ (ผ่าน box-shadow ใน keyframe)
+    // กำหนดขนาดสุ่ม
+    const size = Math.random() * 60 + 30;
+    firework.style.width = size + "px";
+    firework.style.height = size + "px";
+
+    document.body.appendChild(firework);
+
+    // ลบ firework หลังจบแอนิเมชัน
+    firework.addEventListener("animationend", () => {
+      firework.remove();
+    });
+  }
+
+  // สร้างพลุไฟทุก 400 ms
+  const fireworkInterval = setInterval(createFirework, 400);
+
+  blowBtn.addEventListener("click", () => {
+    // ดับไฟเทียนทั้งหมด
+    flames.forEach(flame => flame.style.display = "none");
+
+    // แสดงข้อความสุขสันต์วันเกิด
+    message.classList.add("show");
+
+    // ปิดปุ่มเป่าเค้ก
+    blowBtn.disabled = true;
+
+    // หยุดสร้างพลุไฟใหม่
+    clearInterval(fireworkInterval);
+  });
+</script>
+
+</body>
+</html>
+
